@@ -1,0 +1,71 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\title{Assignment 9}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf What is Self-concordant Function? Discuss its relation with Newton’s method.}
+\\
+{\bf Ans.-}
+\\
+
+For a optimization problem, a self-concordant function is a function f : R $->$ R for which,
+\begin{align*}
+|f^{'''}(x)| \le 2f^{''}(x)^{3/2}
+\end{align*}
+or, a function f : R $->$ R that, wherever $f^{''}(x) > 0$, satisfies
+\begin{align*}
+\mid{\frac{d}{dx}\frac{1}{\sqrt{f^{''}(x)}}}\mid{} \le 1
+\end{align*}
+and which satisfies $f^{'''}(x)$ = 0 elsewhere.
+\\
+Examples:
+\\
+i.) Linear and Quadratic functions.
+\\
+ii.) Negative Logarithm i.e. f(x) = -log(x)
+\\
+\\
+{\bf Advantages:}
+\\
+i.) Possesses affine invariant property
+\\
+ii.) Provides a new tool for analyzing Newton’s method that exploits the affine invariance of the method.
+\\
+iii.) Results in a practical upper bound on the Newton’s iterations
+\\
+iv.) Plays a crucial role in performance analysis of interior point method
+\\
+\\
+{\bf Newton's method using Self-concordant function:}
+\\
+\\
+Let f : $R^{n}$ $->$ R be self-concordant and $\Delta^{2}f(x)$ $\ge$ 0 for all x $L_{0}$
+\\
+\\
+Self-concordance replaces strict convexity and Lipschitz Hessian assumptions and Newton decrement replaces the role of the gradient norm.
+\\
+Using Self-concordant, Newton direction is:
+\\
+
+For Newton’s decrement $\lambda(x)$ and any $v \in R^{n}$
+\begin{align*}
+\lambda(x) = \sup_{v \neq 0}\frac{-v^T\Delta f(x)}{(v^T\Delta^2f(x)v)^{1/2}}
+\end{align*}
+with the supremum attainment at v = $- [\Delta^2 f(x)]^{-1} \Delta f(x)$
+\end{document}

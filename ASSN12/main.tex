@@ -1,0 +1,82 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+\title{Assignment 11}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf Discuss Primal-dual interior-point method and compare it with barrier method.}
+\\
+{\bf Ans.-}
+\\
+Let's consider a convex optimisation problem with inequality constraints:
+\begin{align*}
+\min_{x}\quad& f(x)\\
+s.t. \quad& h_{i}(x) \le 0\quad for\quad i = 1,...,m\\
+& \;\; Ax = B
+\end{align*}
+Primal-dual interior-point method
+\\
+\\
+Start with $x_{(0)}$ such that
+$h_i(x^{(0)})$ $<$ 0, i = 1, . . . , m, and
+\\
+$u^{(0)}$ $>$ 0, $v^{(0)}$. Define $n^{(0)}$ = -$h(x^{(0)})^T u^{(0)}$. 
+\\
+We fix $\mu$ $>$ 1, repeat for k = 1, 2, 3 . . .
+\\
+\\
+Now,
+\begin{itemize}
+    \item Define t = $\frac{\mu m}{n^(k-1)}$
+    
+    \item Compute primal-dual update direction $\Delta$y
+
+    \item Use backtracking to determine step size s
+    
+    \item Update $y^{(k)}$ = $y^{(k-1)}$ + s $\Delta$y
+    
+    \item Compute $\mu^{(k)}$ = -$h(x^{(k)})^T u^{(k)}$
+
+    \item Stop if $\mu^{(k)}$ $\le$ $\epsilon$ and $(\parallel r_{prim}\parallel_{2}^{2} + \parallel r_{dual}\parallel_2^2)^1/2$ $\le$ $\epsilon$
+\end{itemize}
+
+This method terminates when x is primal feasible, also $\lambda, \nu$ are dual feasible and surrogate gap is smaller than tolerance$(\epsilon)$,
+
+In the primal-dual interior-point method the iterates, $x^k, \lambda^k, \nu^k$ are not always feasible escept in the algorithm convergence limit. So, we are not able to easily evaluate a duality gap $\nu^k$ in step k of the algorithm like in barrier method. So we define something called surrogate gap, for any x that satisfies $f(x) \prec 0 \; and \; \lambda \succeq 0 $ as : 
+
+\begin{align*}
+\hat{\eta}(x, \lambda) = -f(x)^T \lambda
+\end{align*}
+
+If x is primal feasible and $\lambda, \nu$ are dual feasible, then surrogate gap $\hat{\eta}$ will be the duality gap
+\\
+Basic difference between Primal-Dual and Barrier Method:
+\begin{itemize}
+\item Both can be motivated in terms of perturbed KKT conditions
+
+\item Primal-dual interior-point methods take one Newton step, and
+move on (no separate inner and outer loops)
+
+\item Primal-dual interior-point iterates are not necessarily feasible
+
+\item Primal-dual interior-point methods are often more efficient, as they can exhibit better than linear convergence
+
+\item Primal-dual interior-point methods are less intuitive ...
+\end{itemize}
+\end{document}

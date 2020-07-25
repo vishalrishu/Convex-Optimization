@@ -1,0 +1,167 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\title{Assignment 4}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf Explain Newton’s method with equality constraints. Also explain Newton step with infeasible start.}
+\\
+{\bf Ans. -}
+\\
+Lets consider a problem with linear equality constraints.
+\begin{align*}
+\min_{x \in \mathcal{R}^N}\quad& f(x)\\
+s.t. \quad& h(x) = 0
+\end{align*}
+Here, assume f(x) is convex and twice differentiable.
+\\
+Now, Let g(x) is gradient of f(x).
+\\
+Let H(x) is Hessian of f(x) and
+\\
+J(x) is Jacobian.
+\\
+for non-constraint probelm, Newton' Method is:
+\begin{align*}
+    x_+ = x + \Delta x_{nt}
+\end{align*}
+here, Newton's step is:
+\begin{align*}
+    \Delta x_{nt} = - H(x)^{-1} g(x)
+\end{align*}
+To solve $\Delta x_{nt}$, We have to solve this linear equation:
+\[
+\begin{bmatrix}
+    H(x)       & J(x)^T \\
+    J(x)       & 0 \\
+\end{bmatrix}
+\begin{bmatrix}
+    \Delta x_{nt}        \\
+    \lambda       \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    -g(x)\\
+    -h(x)\\
+\end{bmatrix}
+\]
+Assume that h(x) = Ax and solution is feasible for h(x) = 0, then linear system:
+\[
+\begin{bmatrix}
+    H(x^k)       & A^T \\
+    A       & 0 \\
+\end{bmatrix}
+\begin{bmatrix}
+    \Delta x        \\
+    \lambda       \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    -g\\
+    0\\
+\end{bmatrix}
+\]
+Let's suppose H(x) is strictly convex, and A is full rank matrix then linear system is solvable:
+\[
+\begin{bmatrix}
+    \Delta x        \\
+    \lambda       \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    H(x^k)       & A^T \\
+    A       & 0 \\
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+    -g\\
+    0\\
+\end{bmatrix}
+\]
+This is Newton's step with feasible start equation.
+
+\begin{algorithm}
+\caption{Newton's method with equality constraints}
+\begin{algorithmic}[1]
+    \State given starting point x $\in$ $\bf{dom}$ f and Ax = b, tolerance $\epsilon$ > 0
+    
+    \State repeat 
+    
+    \State Compute the Newton step and decrement $\Delta x_{nt}, \lambda(x) $.
+    
+    \State Stopping criterion. quit if $\lambda^2/2 \le \epsilon$
+    
+    \State Line search. Choose step size t by backtracking line search.
+    
+    \State Update. x := x + t$\Delta x_{nt} $
+\end{algorithmic}
+\end{algorithm}
+
+\newpage
+{\bf Newton Step with Infeasible start:}
+\\
+\\
+The Newton step of f(x) at an infeasible point x for the linear
+equality constrained problem is given by the solution of:
+\\
+\[
+\begin{bmatrix}
+    H(x)       & A^T \\
+    A       & 0 \\
+\end{bmatrix}
+\begin{bmatrix}
+    \Delta x_{nt}       \\
+    \lambda       \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    -g(x)\\
+    Ax-b\\
+\end{bmatrix}
+\]
+\\
+Let x be the an infeasible point. Our goal is to find a step\\ $\Delta$ x s.t. x + $\Delta$x satisfies approximately the optimality condition. After linearization we get:
+\begin{align*}
+A(x + \Deltax) = b ,\\
+g(x) + H(x)\Deltax + A^T \lambda = 0,
+\end{align*}
+i.e., the definition of the Newton step
+\\
+\\
+These are the primal and dual conditions of Newton's method. We have to update x and $\lambda$ both in order to satisfy the optimal conditions i.e. we have to update till Ax = b.
+
+\begin{algorithm}
+\caption{Newton's method with equality constraints}
+\begin{algorithmic}[1]
+    \State given starting point x $\in$ $\bf{dom}$ f,$\lambda$ tolerance $\epsilon$ > 0, $\alpha \in (0, 1/2), \beta \in (0,1)$
+    
+    \State repeat 
+    
+    \State Compute primal and dual Newton steps $\Delta x_{nt}, \Delta \lambda_{nt} $
+    \State Backtracking line search on $\parallel r \parallel_2$ 
+    
+    t:=1
+    
+    \textbf{while} $\parallel r(x + t\Delta x_{nt}, \lambda + t\Delta \lambda_{nt} \parallel_2 > (1 - \alpha t) \parallel r(x,\lambda) \parallel_2. \;\;\; t:=\beta t$
+    
+    \State Update, $x:= x+t\Delta x_{nt}, \lambda := \lambda + t \Delta \lambda_{nt}$
+    
+\textbf{until} Ax=b and $ \parallel r(x, \lambda) \parallel_2 \le \epsilon$
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

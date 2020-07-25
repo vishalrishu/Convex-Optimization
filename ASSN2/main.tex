@@ -1,0 +1,67 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+
+
+\title{Assignment 1}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question}
+{\bf What is Lagrange dual problem? Explain weak and strong Duality? Give relevant equations.}
+\\
+{\bf Ans. -} 
+\\
+The Lagrange dual problem is obtained by forming the Lagrangian of a minimization problem by using non-negative Lagrange multipliers to add the constraints to the objective function, and then minimize the original objective function by solving for the primal variable values.
+\\
+\\
+Let Optimization problem is:
+\begin{align*}
+minimise. \quad& f_0(x)\\
+s.t. \quad& f_i(x) \le 0 \quad i=1,\ldots,m\\
+\\
+Lagrangian:\\
+L(x,\lambda) &= f_0(x) + \sum_{i=1}^m \lambda_i f_i(x)
+\end{align*}
+$\lambda$ are Langrange multipliers.
+\\
+So, the supremum over langrange.
+\begin{align*}
+\max_{\lambda \geq 0} \quad& L(x,\lambda) = \max_{\lambda \geq 0} (f_0(x) + \sum_{i=1}^m \lambda_i f_i(x))
+\end{align*}
+\begin{align*}
+\max_{\lambda \geq 0} \quad& L(x,\lambda) = \begin{cases}f_0(x) & f_i(x) \le 0\\ \infty & otherwise
+\end{cases}
+\end{align*}
+So, the Primal form of optimisation problem is:
+\begin{align*}
+p^* = \min_{x}\max_{\lambda \geq 0}\quad& L(x,\lambda)
+\end{align*}
+Langrange dual function is:
+\begin{align*}
+g(\lambda) = \min_{x}\quad& L(x,\lambda)
+\end{align*}
+Now, the Langrangian dual problem is:
+\begin{align*}
+d^* = \max_{\lambda \geq 0} g(\lambda) = \max_{\lambda \geq 0}\min_{x}\quad& L(x,\lambda)
+\end{align*}
+Weak duality states that any feasible solution to the dual problem corresponds to an upper bound on any solution to the primal problem. i.e.,
+\begin{align*}
+p^* \geq d^*
+\end{align*}
+While, Strong duality occurs when the values of the optimal solutions to the primal problem and dual problem are always equal. i.e.,
+\begin{align*}
+p^* = d^*
+\end{align*}
+\end{document}
+

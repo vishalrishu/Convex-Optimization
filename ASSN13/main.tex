@@ -1,0 +1,98 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+\title{Assignment 12}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf Discuss Semidefinite Programming (SDP) including Cone of PSD Matrices and SDP duality. Explain the barrier method for SDP.}
+\\
+{\bf Ans.-}
+\\
+
+Let $X \in S^n$ . We can think of X as a matrix, or equivalently, as an array of $n^2$ components of the form $(x_{11}, . . . , x_{nn})$. We can also just think of X as
+an object (a vector) in the space $S^n$ . All three different equivalent ways of looking at X will be useful. 
+\\
+
+Now, the linear function of X can be written as, C(X) or $C\bullet X$ , where
+\begin{align*}
+C\bullet X := \sum_{i=1}^n \sum_{j=1}^n C_{ij} X_{ij}
+\end{align*}
+If X is a symmetric matrix, there is no loss of generality in assuming that the matrix C is also symmetric. 
+\\
+
+Now, let's define a semidefinite program. A semidefinite program (SDP) is an optimization problem of the form:
+\begin{align*}
+SDP:\quad minimise\quad C\bullet X 
+\\ 
+s.t.\quad A_i\bullet X =& b_i,\quad i=1,.,.,m,
+\\
+X \succeq 0
+\end{align*}
+{\bf Semidefinite Programming Duality}
+\\
+
+The dual problem can be defined as:
+\begin{align*}
+SDD:\quad maximise\quad \sum_{i=1}^m y_ib_i
+\\ 
+s.t.\quad \sum_{i=1}^m y_iA_i + S =& C,
+\\
+S \succeq 0
+\end{align*}
+And, the constraints of SDD state that the matrix S defined as:
+\begin{align*}
+\qquad \qquad S = C - \sum_{i=1}^m y_iA_i
+\end{align*}
+must be semi-definite, that means:
+\begin{align*}
+\qquad \qquad C - \sum_{i=1}^m y_iA_i \succeq 0
+\end{align*}
+{\bf Barrier Method for SDP:}
+\\
+
+For SDP, we need a barrier function whose values approach +$\infty$ as points X approach the boundary of the semi-definite cone $S_n^+$. 
+\\
+Let's consider the logarithmic barrier problem BSDP($\theta$) parameterized by the positive barrier parameter $\theta$:
+\begin{align*}
+BSDP(\theta):\quad C \bullet X - \theta ln(det(X)
+\\ 
+s.t.\quad A_i\bullet X =& b_i,\quad i=1,.,.,m,
+\\
+X \succ 0
+\end{align*}
+Now, the objective function:
+\begin{align*}
+\qquad \qquad \Delta f_{\theta}(X) = C - \theta X^{-1} 
+\end{align*}
+Now, X = $LL^{T}$, because X is symmetric.\\
+\begin{align*}
+\qquad \qquad S = \theta X^{-1} = \theta L^{-T} L{-1},
+\end{align*}
+and,
+\begin{align*}
+\qquad \qquad \frac{1}{\theta} L^{T}SL = I
+\end{align*}
+So, the KKT conditions of BSDP are:
+\begin{itemize}
+    \item $A_i\bullet X$ = $b_i,\quad$ i=1,.,.,m
+    \item X $\succ$ 0, X = $LL^{T}$
+    \item $\sum_{i=1}^m y_iA_i$ + S = C
+    \item I - $\frac{1}{\theta} L^{T}SL$ = 0
+\end{itemize}
+\end{document}

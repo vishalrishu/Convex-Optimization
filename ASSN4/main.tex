@@ -1,0 +1,55 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{Assignment 3}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question}
+{\bf What are KKT conditions? Give relevant equations.}
+\\
+{\bf Ans. -} 
+\\
+Let Optimization problem is:
+\begin{align*}
+minimise. \quad& f_0(x)\\
+subject.to. \quad& f_i(x) \le 0 \quad i=1,\ldots,m\\
+\\
+Lagrangian:\\
+L(x,\lambda) &= f_0(x) + \sum_{i=1}^m \lambda_i f_i(x)
+\end{align*}
+\\
+There are some necessary condition given by Karush-Kuhn Tucker(KKT):
+\\
+\\
+1.) Feasibility:
+\\ 
+\tab $f_i(x*)$ is feasible.
+\\
+\tab Where x* is primal values.
+\\
+2.) There will be no direction that can improve objective and is feasible
+\begin{align*}
+f_0(x*) - \sum_{i=1}^m \lambda_i^* f_i(x*) = 0
+\end{align*}
+3.) Complementary Slackness
+\begin{align*}
+\lambda_i^* * f_i(x*) = 0 \quad i=1,\ldots,m
+\end{align*}
+4.) Positive Langrange's Multiplier
+\begin{align*}
+\lambda_i^* \geq 0 \quad i=1,\ldots,m
+\end{align*}
+\end{document}

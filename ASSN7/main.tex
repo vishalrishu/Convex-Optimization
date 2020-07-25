@@ -1,0 +1,68 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\title{Assignment 6}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf What is logistic regression? Explain (250 words)
+For Feature vectors $x_{i}$ $\in$ $M^{n}$ and labels $y_{i}$=$\{1,-1\}$,}
+\\
+{\bf a.)Show that the objective function to be minimized is convex.}
+\\
+{\bf b.)Find the gradient and hessian.}
+\\
+{\bf Ans. -}
+\\
+ Logistic Regression is commonly used when the dependent variable can be categorized. For example, when we need to classify whether an email is spam or ham, we can use logistic regression.
+ \\
+ \\
+ Initial model:
+\begin{align*}
+h_{w}(x) = w^{T}x
+\end{align*}
+This model can give outputs greater than 1, and that is not desired. So, we will add an activation function(Sigmoid) to bound the output between 0 and 1.
+\begin{align*}
+    g(z) = \frac{1}{1 + e^{-z}}
+\end{align*}
+so, the model is:
+\begin{align*}
+h_{w}(x) = g(w^{T}x)
+\end{align*}
+Let's create a decision boundary, if $h_{w}(x)>0.5$ then it will give 1 otherwise -1.
+\\
+Now, Objective function is:
+\begin{align*}
+J(w) = \begin{cases}-log(1-h_{w}(x)) & if\quad y = -1\\ -log(h_{w}(x) & if\quad y = 1
+\end{cases}
+\end{align*}
+We can write it in this form:
+\begin{align*}
+J(w) = \frac{-1}{m}\sum_{i=1}^m y^{(i)}log(h_{w}(x^{(i)}) + (1-y^{(i)})log(1-h_{w}(x^{(i)}))
+\end{align*}
+As we can see our function is logarithmic function of sigmoid, i.e. a convex function. So, our objective function is convex. We can also prove this by checking if the double differentiation of this function is positive or not.
+\newpage
+Gradient of J(w):
+\begin{align*}
+\Delta J(w) = \frac{1}{m}(h_{w}(x) - y)x
+\end{align*}
+Hessian of cost function is:
+\begin{align*}
+\Delta^{2} J(w) = \frac{1}{m}h_{w}(x)(1-h_{w}(x))
+\end{align*}
+As we know, $h_{w}$ will generate only in the range of 0 and 1. So the hessian will be always positive and Our objective function is a convex function. 
+\end{document}

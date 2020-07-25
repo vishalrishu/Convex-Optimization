@@ -1,0 +1,140 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\title{Assignment 8}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+\begin{align*}
+\min_{x_1,x_2 \in R^2} \frac{1}{2} x_1^2 - x_2^2 \;\; subject \; to \; 1 - x_1^2 - x_2^2 \ge 0
+\end{align*}
+Or, we can write it as:
+\begin{align*}
+\min_{x_1,x_2 \in R^2} \frac{1}{2} x_1^2 - x_2^2 \;\; subject \; to \; x_1^2 + x_2^2 - 1 \le 0 
+\end{align*}
+Now, the Lagrangian is:
+\begin{align*}
+\mathcal{L}(x1,x2,\lambda) = \frac{1}{2} x_1^2 - x_2^2 + \lambda(x_1^2 + x_2^2 - 1)
+\end{align*}
+{\bf a.) Ans.-}
+\\
+
+KKT conditions are:
+\begin{align*}
+i.)\quad  \frac{\partial \mathcal{L}}{\partial x_1} = x_1(2\lambda +1) = 0 
+\end{align*}
+\begin{align*}
+ii.)\quad  \frac{\partial \mathcal{L}}{\partial x_2} = x_2(2\lambda -2) = 0 
+\end{align*}
+\begin{align*}
+iii.)\quad \lambda( x_1^2 + x_2^2 - 1) = 0 
+\end{align*}
+\begin{align*}
+iv.)\quad \lambda \geq 0
+\end{align*}
+\begin{align*}
+v.)\quad x_1^2 + x_2^2 - 1 \geq 0
+\end{align*}
+From (i), either $x_1$ = 0 or 2$\lambda$ + 1 = 0 i.e. $\lambda$ = -1/2 which does not satisfy (iv) condition. So, we can say that $x_1$ = 0.
+\\
+\\
+From (ii), either $x_2$ = 0 or $2\lambda$ - 2 = 0 i.e. $\lambda$ = 1 which satisfy KKT conditions.
+\\
+\\
+From (iii), either $\lambda$ = 0 or $x_1^2 + x_2^2 - 1$ = 0.
+Let's consider $\lambda$ = 1, then $x_1$ = 0 and $x_1^2 + x_2^2 - 1$ = 0 i.e. $x_2$ = 1/-1
+\\
+If $\lambda$ = 0, then from (i) and (ii), $x_1$ = 0 and $x_2$ = 0
+\\
+\\
+Now, the solution set:
+\\
+For $\lambda$ = 0 then ($x_1$, $x_2$) = (0, 0)
+\\
+For $\lambda$ = 1 then ($x_1$, $x_2$) = (0, 1) or (0, -1)
+\\
+\\
+{\bf b.) Ans.-}
+\\
+
+\textbf{Slater's Equation}
+\begin{align*}
+x_1^2 + x_2^2 - 1 < 0 ; \text{for any } x_1,x_2 \in R^2    
+\end{align*}
+
+In this problem, this condition holds true for $(x_1,x_2) = (0,0)$
+
+Now, we have to find out local minima with first order necessary conditions:
+\begin{align*}
+f(x) = \frac{1}{2} x_1^2 - x_2^2
+\end{align*}
+\begin{equation}
+    \frac{\partial f}{\partial x_1} = x_1 = 0    
+\end{equation}
+
+\begin{equation}
+    \frac{\partial f}{\partial x_2} = 2x_2 = 0
+\end{equation}
+
+From (1) and (2), we get local minima as (0,0) which is one of the KKT points.
+\\
+\\
+{\bf c.) Ans.-}
+\\
+
+For $x^*$ to be a global minimizer, we have to check if $x^*$ satisfies these two conditions :
+\begin{align*}
+    \mathcal{L}(x^*, \lambda^*) \le \mathcal{L}(x, \lambda^*) ; \; \text{for all }x
+\end{align*}
+\begin{align*}
+\mathcal{L}(x^*, \lambda^*) \le \mathcal{L}(x, \lambda^) ; \; \text{for all }\lambda \ge 0
+\end{align*}
+\begin{align*}
+\mathcal{L}(x^*, \lambda^*) = -1 \; ; \; for \; (x_1, x_2, \lambda) = (0,1,1) \; and \; (0,-1,1)
+\end{align*}
+
+For any $x_1, x_2$ that satisfy $ x_1^2 + x_2^2 - 1 = 0$, we will get minimum value for $\mathcal{L}(x, \lambda^), \mathcal{L}(x, \lambda^*) = -1$, which is equal to $\mathcal{L}(x^*, \lambda^*)$
+\\
+Thus, we can say that the points $(0,1) , (0,-1) $ are global minimizers of original equation.
+\\
+\\
+{\bf d.) Ans.-}
+\\
+
+The constraint is as follows  :
+\begin{align*}
+x_1^2 + x_2^2 - 1 \le 0
+\end{align*}
+
+For point (0, 1):
+\begin{align*}
+x_1^2 + x_2^2 - 1 = 0 \le 0
+\end{align*}
+
+For point (0, -1):
+\begin{align*}
+x_1^2 + x_2^2 - 1 = 0 \le 0
+\end{align*}
+
+For point (0, 0):
+\begin{align*}
+x_1^2 + x_2^2 - 1 = -1 \le 0
+\end{align*}
+
+So, all the points in the solution satisfies the constraint.
+
+\end{document}

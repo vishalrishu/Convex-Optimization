@@ -1,0 +1,52 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+
+
+\title{Assignment 2}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf What is Slater’s constraint qualification? Give relevant equations.}
+\\
+{\bf Ans. -} 
+\\
+As we know, Strong duality usually holds for convex problems and Constraint qualifications are the conditions for strong duality in convex problems.
+\\
+\\
+Convex problem is:
+\begin{align*}
+minimise. \quad& f_0(x)\\
+subject.to. \quad& f_i(x) \le 0  \quad i=1,\ldots,m
+\\
+Lagrangian:\\
+L(x,\lambda) &= f_0(x) + \sum_{i=1}^m \lambda_i f_i(x)
+\end{align*}
+Slater's constraint ensures that strong duality holds for convex problems.
+\\
+There are two assumptions for slater's theorem:
+\\
+i) Our objective function $f_{0}$ and the constraints should be convex.
+\\
+ii) Optimal problem is finite.
+\\
+Slater's theorem states that there should be a slater vector x' for which,
+\begin{align*}
+\quad& f_i(x') < 0 for \quad i=1,\ldots,m
+\end{align*}
+If these conditions fulfilled then we can say that:
+\\
+i) There is Strong Duality i.e. $p^*$ = $d^*$
+\\
+ii) Optimal solution of convex problem is bounded and non-empty.
+\end{document}

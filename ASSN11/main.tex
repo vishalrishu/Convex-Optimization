@@ -1,0 +1,49 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+\title{Assignment 10}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf Discuss log barrier method.}
+\\
+{\bf Ans.-}
+\\
+
+As we know, Newton’s method used for minimizing convex functions with equality constraints. One of the limitations of this method is that we cannot deal with inequality constraints. To address this issue, there is a method called Log barrier method.
+\begin{align*}
+\min_{x}\quad& f(x)\\
+s.t. \quad& h_{i}(x) \le 0\quad for\quad i = 1,...,m
+\\
+Ax = B
+\end{align*}
+Let's assume that f, $h_i$ are all convex and twice differentiable functions, all with domain $R^n$, the log barrier is defined as:
+\begin{align*}
+\Phi(x) = - \sum_{i = 1}^{m}\log(-h_i(x))
+\end{align*}
+The domain is the set of strictly feasible points. Now, Lets ignore the equality constraints, this problem can be written as:
+\begin{align*}
+\min_{x} f(x) + \sum_{i=1}^{m}I_{\{h_{i}(x) \le 0\}}(x)
+\end{align*}
+Now, let's add log barrier function:
+\begin{align*}
+\min_{x} f(x) - (\frac{1}{t}). \sum_{i = 1}^{m}\log(-h_i(x))
+\end{align*}
+Where t $>$ 0, This approximation is more accurate for larger t. But for any value of t, the log barrier approaches $\infty$ if any $h_i(x)$ $->$ 0
+
+\end{document}

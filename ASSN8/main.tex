@@ -1,0 +1,89 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\title{Assignment 7}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf What is linear SVM? Solve the problem of SVM using Quadratic Programming.}
+\\
+{\bf Ans. -}
+\\
+Support Vector Machine(SVM) is a supervised machine learning algorithm which can be used for both classification or regression problems. However, it is mostly used in classification problems. In the Linear SVM algorithm, we plot each data item as a point in n-dimensional space (where n is number of features you have) with the value of each feature being the value of a particular coordinate. Then, we perform classification by finding the hyper-plane that differentiates the two classes very well.
+\\
+\\
+Let's assume our dataset consists N data, which is of two categories. Let's draw a linear hyperplane that can seperate them.
+\begin{align*}
+y_{n} = w^{T}x_{n} + b,\quad y_{n} \in \{1, -1\}
+\end{align*}
+For the best hyperplane, we maximise the margin between two support vectors that's from different category.
+\\
+let's assume the two points are $x_{0}$ and $x_{n}$, 
+\\
+the perpendicular distance between these two will be:
+\begin{align*}
+    d = \frac{|w^{T}x_{n} + b - w^{T}x_{0} + b|}{||w||}
+\end{align*}
+We know that for $x_{0}$ that lies on the hyperplane, its corresponding prediction y0 is zero. So,
+\begin{align*}
+    d = \frac{|w^{T}x_{n} + b |}{||w||} = \frac{1}{||w||}
+\end{align*}
+Now, we have to maximize the margin to find best hyperplane.
+\begin{align*}
+    d = max(\frac{1}{||w||})\quad subject\quad to\quad \min_{n} |w^{T}x_{n} + b| = 1
+\end{align*}
+Let's turn it to a minimization problem:
+\begin{align*}
+    d = min(\frac{1}{2} ||w||^{2})
+\end{align*}
+Let's find multiplication of actual and predicted y:
+\\
+actual y = $y_{n}$
+\\
+predicted y = $y_{n}^{'}$
+\begin{align*}
+y_{n}*y_{n}^{'} \geq 1
+\end{align*}
+Now, Modified equation:
+\begin{align*}
+y_{n}(w^{T}x_{n} + b) \geq 1
+\end{align*}
+The primal problem using Lagrangian:
+\begin{align*}
+L(w, b) = \frac{1}{2}w^{T}w - \sum_{n=1}^N \alpha_{n} [y_{n}(w^{T}x_{n} + b) - 1]
+\end{align*}
+Let's find dependent of one parameter:
+\begin{align*}
+\frac{\partial L}{\partial w} = w -  \sum_{n=1}^N \alpha_{n}y_{n}x_{n},\quad \frac{\partial L}{\partial b} = -\sum_{n=1}^N \alpha_{n}y_{n} 
+\end{align*}
+From these two equation, we get:
+\begin{align*}
+w = \sum_{i=1}^N \alpha_{n}y_{n}x_{n},\quad \sum_{i=1}^N \alpha_{n}y_{n} = 0
+\end{align*}
+Replace these two equations in Langrangian:
+\begin{align*}
+L(\alpha) = \frac{1}{2}(\sum_{m=1}^N \alpha_{m}y_{m}x_{m})(\sum_{n=1}^N \alpha_{n}y_{n}x_{n}) - (\sum_{n=1}^N \alpha_{n}y_{n}x_{n}) (\sum_{m=1}^N \alpha_{m}y_{m}x_{m}) + \sum_{n=1}^{N} \alpha_{n}    
+\end{align*}
+or,
+\begin{align*}
+L(\alpha) = \sum_{n=1}^{N} \alpha_{n} - \frac{1}{2} \sum_{m=1}^{N}\sum_{n=1}^{N} \alpha_{m}\alpha_{n}y_{m}y_{n}x_{m}x_{n}
+\end{align*}
+\begin{align*}
+subject\quad to\quad \alpha_{n} \geq 0,\quad \sum_{n=1}^{N} \alpha_{n}y_{n} = 0
+\end{align*}
+This is the dual problem of Linear SVM. We can also see this equation is quadratic problem that only depends on Lagrangian multiplier $\alpha$. 
+\end{document}

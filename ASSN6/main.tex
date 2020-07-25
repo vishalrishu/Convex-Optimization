@@ -1,0 +1,92 @@
+\documentclass[fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{subfig} 
+\usepackage{bm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\title{Assignment 5}
+\author{Vishal Kumar, MIT2019090}
+\date{}
+
+\begin{document}
+
+\maketitle
+\section*{Question}
+{\bf Discuss Quasi-Newton Condition with DFP and BFGS updates.}
+\\
+{\bf Ans. -}
+\\
+Newton’s method for finding an extreme point is:
+\begin{align*}
+x_{+} = x - H^{-1}(x)g(x)
+\end{align*}
+Quasi-Newton methods repeat updates of the form:
+\begin{align*}
+x_{+} = x + ts
+\end{align*}
+where, s is defined by linear system:
+\begin{align*}
+H(x)s = -g(x)
+\end{align*}
+Where, H(x) is hessian and g(x) is gradient of f.
+\\
+\\
+{\bf Algorithm:}
+\begin{algorithmic}
+\State Let \quad x $\in$ R, H $>$ 0 for k=1,2,3.,.,. 
+\State Repeat
+
+\State \quad Solve\quad $H^{k-1}s^{k-1}$ = -$g^{k-1}$
+
+\State \quad Update\quad $x^{k}$ = $x^{k-1}$ + $t_{k}s^{k-1}$
+
+\State \quad Compute\quad $H^{k}$ from $H^{k-1}$
+\end{algorithmic}
+Different Quasi-Newton methods implement Step 3 differently. As
+we will see, commonly we can compute:
+$(H^{k})^{-1}$ from $(H^{k-1})^{-1}$
+\\
+\\
+{\bf Davidon-Fletcher-Powell (DFP) update:}
+\\
+In this method, they used inverse C:
+\begin{align*}
+C_{+} = C + auu^{T} + bvv^{T}
+\end{align*}
+Multiplying by y, using the secant equation s = $C_{+}y$, and solving for a, b, yields:
+\begin{align*}
+C_{+} = C - \frac{Cyy^{T}C}{y^{T}Cy} + \frac{ss^{T}}{y^{T}s}
+\end{align*}
+then It shows:
+\begin{align*}
+H^{k} = (I - \frac{ys^{T}}{y^{T}s}) H^{k-1} (I - \frac{sy^{T}}{y^{T}s}) + \frac{yy^{T}}{y^{T}s}
+\end{align*}
+This is the Davidon-Fletcher-Powell (DFP) update.
+\\
+O($n^{2}$), preserves positive definiteness.
+\\
+{\bf Broyden-Fletcher-Goldfarb-Shanno(BFGS) update:}
+\\
+Let’s now try a rank-two update:
+\begin{align*}
+H^{k} = H^{k-1} + auu^{T} + bvv^{T}
+\end{align*}
+The secant equation y = $H^{k}s$ yields
+\begin{align*}
+y - H^{k}s = (au^{T}s)u + (bv^{T}s)v
+\end{align*}
+Putting u = y, v = $H^{k-1}s$, and solving for a, b we get:
+\begin{align*}
+H^{k} = H^{k-1} - \frac{H^{k-1}ss^{T}H^{k-1}}{s^{T}H^{k-1}s} + \frac{yy^{T}}{y^{T}s}
+\end{align*}
+called the Broyden-Fletcher-Goldfarb-Shanno (BFGS) update.
+\\
+Importantly, BFGS update preserves positive definiteness
+\end{document}
